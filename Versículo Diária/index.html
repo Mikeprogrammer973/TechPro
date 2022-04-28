@@ -1,0 +1,1088 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./favicon_io/site.webmanifest">
+<script> type="text/javascript" src="https://platform.twitter.com/widgets.js></script> 
+<script src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=61d9acd15d828a00190e41ae&product=inline-share-buttons" async="async"></script>
+    <title>Daily Verses</title>
+    <style>
+        :root{
+            --cor01: #86FD65;
+            --cor02: #4AFC19;
+            --cor03: #3DCC14;
+            --cor04: #257D0C;
+            --cor05: #427D32;
+        }
+     body{
+         height:100vh;
+         margin-top:0px;
+         margin-bottom:0px;
+         background:white;
+        
+
+     }
+     header{
+         padding:50px;
+         text-align:center;
+         font: bold 5vw serif, sans-serif;
+         color:white;
+         background: linear-gradient(to bottom, green, lightgreen);
+         background-image: url('./bible_04.jpg');
+         background-position: center center;
+         background-size:100px 100px;
+         min-width:280px;
+         max-width:940px;
+         margin:0px auto 0px auto;
+         border-bottom:3px groove green;
+        
+         
+     }
+     #logo{
+         margin:20px 0px 0px 0px;
+         padding:10px;
+         text-shadow:5px 5px 7px rgb(0, 0, 0, 0.598);
+         text-decoration:underline;
+         background-image:linear-gradient(to right, var(--cor04), transparent);
+         border-radius:20px;
+         box-shadow:2px 2px 5px rgb(0, 0, 0, 0.120);
+     }
+     #logo:hover{
+         color:var(--cor02);
+     }
+     #time{
+         margin:5px 20px 10px 2px;
+         border-radius:30px;
+         box-shadow:2px 2px 5px rgb(0, 0, 0, 0.267);
+         width:150px;
+         padding:10px;
+         text-align:center;
+         font: italic 580 1em monospace;
+     }
+     #time:hover{
+         background-color:var(--cor01);
+     }
+     main{
+         margin:0px auto 0px auto;
+         padding:20px;
+         min-width:280px;
+         max-width:1000px;
+         font-family: monospace;
+         background-icolor:whitesmoke;
+         border-bottom-right-radius:20px;
+         border-bottom-left-radius:20px;
+        
+     }
+     h1#titre{
+         padding:20px;
+         width:auto;
+         font-size:3vw;
+         border-radius:30px;
+        cor:var(--cor01);
+     }
+     #titre:hover{
+         background-image:linear-gradient(to right, var(--cor03), transparent);
+     }
+     section{
+         margin:20px;
+         padding:30px;
+         
+     }
+     p{
+         margin:5px;
+         padding:20px;
+         font-size:1.5em;
+        border-radius:20px;
+        color:white;
+         background-color:var(--cor05);
+     }
+     p:hover{
+         box-shadow:2px 2px 3px rgb(0, 0, 0, 0.124);
+         
+     }
+#versicle{
+font-size:2vw;
+margin-bottom:10px;
+}
+     #data{
+        background-image:linear-gradient(to bottom, var(--cor05), transparent);
+     }
+     strong{
+         font-size:2em;
+     }
+     #data{
+         margin:0px;
+         padding:2px;
+         display:inline;
+         font: normal 0.3em monospace,sans-serif;
+          }
+      aside{
+border:2px solid white;
+border-radius:50%;
+background-color:var(--cor01);
+color:white;
+font-size:2em;
+width:20px;
+height:30px;
+text-align:center;
+            }
+aside:hover{
+background-color:transparent;
+color:var(--cor05);
+border:2px solid var(--cor01);
+box-shadow:2px 2px 5px var(--cor05);
+}
+#info{
+text-decoration:none;
+color:white;
+}
+#info:hover{
+color:var(--cor05);
+}
+
+#like-button{
+margin-top:10px;
+}
+small{ 
+font-size:0.5em;
+font-style:italic;
+} 
+.sharethis-inline-reaction-buttons{
+max-width:200px;
+}
+    </style>
+</head>
+<body  onload="time()" onload="reload()">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v12.0" nonce="RLjR47cG"></script>
+    <header> 
+        <h1 id="logo">Daily Verses</h1>
+    </header>
+    <main>
+<div id="time"></div>
+<h1 id="titre">VERSE OF THE DAY <p id="data"></p></h1>
+<hr>
+        <section>
+            <p id="versicle" onclick="destaque()" onmouseout="back()">
+            </p>
+<div class="sharethis-inline-share-buttons"></div>
+<div class="sharethis-inline-reaction-buttons"></div>
+</section>
+<aside>
+<a id="info" href="./info.html" target="_blank">!</a>
+</aside>
+<div class="sharethis-inline-follow-buttons"></div>
+    </main>
+        <script>
+
+            function destaque(){
+                versicle.style.background='white'
+                versicle.style.color='var(--cor05)'
+               
+            }
+            function back(){
+                versicle.style.background='var(--cor05)'
+                versicle.style.color='white'
+            }
+            var nowSec =  new Date()
+            var secondos = nowSec.getSeconds()
+            var nowMin =  new Date()
+            var min = nowMin.getMinutes()
+            var nowHour = new Date()
+            var hora = nowHour.getHours()
+            var nowDay =  new Date()
+            var dia = nowDay.getDay()
+            var day = nowDay.getDay()
+            var nome = prompt("What´s your name brother/sister?")
+            function time(){
+            today = new Date()
+            h = today.getHours()
+            m = today.getMinutes()
+            s = today.getSeconds()
+            document.getElementById('time').innerHTML =h+':'+m+':'+s
+            setTimeout('time()', 500)
+            }
+            var nowY = new Date()
+            var year = nowY.getYear()
+            var nowM = new Date()
+            var month = nowM.getMonth()
+            var nowD = new Date()
+            var date = nowD.getDate()
+            switch (month){
+                case 0:
+                month = "January"
+                break
+                case 1:
+                month = "February"
+                break
+                case 2:
+                month = "March"
+                break
+                case 3:
+                month = "April"
+                break
+                case 4:
+                month = "May"
+                break
+                case 5:
+                month = "June"
+                break
+                case 6:
+                month = "July"
+                break
+                case 7:
+                month = "Agost"
+                break
+                case 8:
+                month = "Setember"
+                break
+                case 9:
+                month = "October"
+                break
+                case 10:
+                month = "November"
+                break
+                case 11:
+                month = "December"
+                break
+
+            }
+            switch (year){
+                case 122:
+                year = 2022
+                break
+                case 123:
+                year = 2023
+                break
+                case 124:
+                year = 2024
+                break
+                case 125:
+                year = 2025
+                break
+                case 126:
+                year = 2026
+                break
+                case 127:
+                year = 2027
+                break
+
+            }
+           
+            data.innerHTML = `for ${month} ${date}, ${year}`
+       
+switch (dia){
+            case 0:
+            dia = "Sunday"
+            var ask = prompt(`Brother/Sister ${nome}, do you love Jesus? (Yes/No)`)
+            if(ask === 'yes' || ask === 'Yes'){
+                alert(`Brother/Sister ${nome}, you are on the right path, continue
+
+so!`)
+            }else{
+                alert(`Brother/Sister ${nome}, take your course the fastest
+
+possible, because Jesus is coming back!`)
+            }
+            switch (hora){
+                case 00:
+                versicle.innerHTML = `<strong>John 1:12</strong>t as many as received him, to them gave he power to become the sons of God, even to them that believe on his name.`
+                break
+                case 01:
+                versicle.innerHTML = `<strong>Luke 21:17</strong><br><br>And ye shall be hated of all men for my name's sake.`
+                break
+                case 02:
+                versicle.innerHTML = `<strong>Luke 21:19</strong><br><br>In your patience possess ye your souls.`
+                break
+                case 03:
+                versicle.innerHTML = `<strong>Roman 10:13</strong><br><br>For whosoever shall call upon the name of the Lord shall be saved.`
+                break
+                case 04:
+                versicle.innerHTML = `<strong>1 Corinthians 3:19</strong><br><br>For the wisdom of this world is foolishness with God. For it is written, He taketh the wise in their own craftiness.`
+                break
+                case 05:
+                versicle.innerHTML = `<strong>1 Corinthians 1:25</strong><br><br>Because the foolishness of God is wiser than men; and the weakness of God is stronger than men.`
+                break
+                case 06:
+                versicle.innerHTML = `<strong>Philippians 3:7</strong><br><br>But what things were gain to me, those I counted loss for Christ.`
+                break
+                case 07:
+                versicle.innerHTML = `<strong>Philippians 3:14</strong><br><br>I press toward the mark for the prize of the high calling of God in Christ Jesus.`
+                break
+                case 08:
+                versicle.innerHTML = `<strong>2 Timothy 4:7</strong>g><br><br>I have fought a good fight, I have finished my course, I have kept the faith:`
+                break
+                case 09:
+                versicle.innerHTML = `<strong>Hebrews 11:1</strong><br><br>Now faith is the substance of things hoped for, the evidence of things not seen.`
+                break
+                case 10:
+                versicle.innerHTML = `<strong>Hebrews 11:6</strong><br><br>But without faith it is impossible to please him: for he that cometh to God must believe that he is, and that he is a rewarder of them that diligently seek him.`
+                break
+                case 11:
+                versicle.innerHTML = `<strong>Hebrews 12:1</strong><br><br>Wherefore seeing we also are compassed about with so great a cloud of witnesses, let us lay aside every weight, and the sin which doth so easily beset us, and let us run with patience the race that is set before us.`
+                break
+                case 12:
+                versicle.innerHTML = `<strong>1 Peter 3:10</strong><br><br>For he that will love life, and see good days, let him refrain his tongue from evil, and his lips that they speak no guile.`
+                break
+                case 13:
+                versicle.innerHTML = `<strong>1 Peter 3:13</strong><br><br>And who is he that will harm you, if ye be followers of that which is good?`
+                break
+                case 14:
+                versicle.innerHTML = `<strong>1 John 4:1</strong><br><br>Beloved, believe not every spirit, but try the spirits whether they are of God: because many false prophets are gone out into the world.`
+                break
+                case 15:
+                versicle.innerHTML = `<strong>1 John 4:4</strong><br><br>Ye are of God, little children, and have overcome them: because greater is he that is in you, than he that is in the world.`
+                break
+                case 16:
+                versicle.innerHTML = `<strong>1 John 4:20</strong><br><br>If a man say, I love God, and hateth his brother, he is a liar: for he that loveth not his brother whom he hath seen, how can he love God whom he hath not seen?`
+                break
+                case 17:
+                versicle.innerHTML = `<strong>Revelation 3:20</strong><br><br>Behold, I stand at the door, and knock: if any man hear my voice, and open the door, I will come in to him, and will sup with him, and he with me.`
+                break
+                case 18:
+                versicle.innerHTML = `<strong>Matthew 6:33</strong><br><br>But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.`
+                break
+                case 19:
+                versicle.innerHTML = `<strong>Matthew 7:7</strong><br><br>Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you.`
+                break
+                case 20:
+                versicle.innerHTML = `<strong>John 3:3</strong><br><br>Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God.`
+                break
+                case 21:
+                versicle.innerHTML = `<strong>John 8:32</strong><br><br>And ye shall know the truth, and the truth shall make you free.`
+                break
+                case 22:
+                versicle.innerHTML = `<strong>Luke 17:3</strong><br><br>Take heed to yourselves: If thy brother trespass against thee, rebuke him; and if he repent, forgive him.`
+                break
+                case 23:
+                versicle.innerHTML = `<strong>Luke 21:15</strong><br><br>For I will give you a mouth and wisdom, which all your adversaries shall not be able to gainsay nor resist.`
+                break
+default:
+versicle.innerHTML=`<strong>System error!</strong>`
+break
+            }
+            break
+            case 1:
+            dia = 'Monday'
+            var ask = prompt(`Brother/Sister ${nome}, who is Jesus in your life?`)
+            switch (hora){
+                case 00:
+                versicle.innerHtml=`<strong>Psalms 96:1</strong><br><br>O sing unto the LORD a new song: sing unto the LORD, all the earth.`
+                break
+                case 01:
+                versicle.innerHTML = `<strong>Isaiah 45:2</strong><br><br>I will go before you
+                and will level the mountains[a];
+            I will break down gates of bronze
+                and cut through bars of iron.`
+                break
+                case 02:
+                versicle.innerHTML = `<strong>Isaiah 45:5</strong><br><br>I am the Lord, and there is no other;
+                apart from me there is no God.
+            I will strengthen you,`
+                break
+                case 03:
+                versicle.innerHTML = `<strong>Isaiah 45:17</strong><br><br>But Israel will be saved by the Lord
+                with an everlasting salvation;
+            you will never be put to shame or disgraced,
+                to ages everlasting.`
+                break
+                case 04:
+                versicle.innerHTML = `<strong>Isaiah 61:1</strong><br><br>The Spirit of the Sovereign Lord is on me,
+                because the Lord has anointed me
+                to proclaim good news to the poor.
+            He has sent me to bind up the brokenhearted,
+                to proclaim freedom for the captives
+                and release from darkness for the prisoners.`
+                break
+                case 05:
+                versicle.innerHTML = `<strong>Isaiah 61:7</strong><br><br>Instead of your shame
+                you will receive a double portion,
+            and instead of disgrace
+                you will rejoice in your inheritance.
+            And so you will inherit a double portion in your land,
+                and everlasting joy will be yours.`
+                break
+                case 06:
+                versicle.innerHTML = `<strong>Isaiah 6:8</strong><br><br>Then I heard the voice of the Lord saying, “Whom shall I send? And who will go for us?”
+
+                And I said, “Here am I. Send me!”`
+                break
+                case 07:
+                versicle.innerHTML = `<strong>Isaiah 41:9</strong><br><br>I took you from the ends of the earth,
+                from its farthest corners I called you.
+            I said, ‘You are my servant’;
+                I have chosen you and have not rejected you.`
+                break
+                case 08:
+                versicle.innerHTML = `<strong>Isaiah 41:10</strong><br><br>So do not fear, for I am with you;
+                do not be dismayed, for I am your God.
+            I will strengthen you and help you;
+                I will uphold you with my righteous right hand.`
+                break
+                case 09:
+                versicle.innerHTML = `<strong>Romans 8:1</strong><br><br>Therefore, there is now no condemnation for those who are in Christ Jesus.`
+                break
+                case 10:
+                versicle.innerHTML = `<strong>Romans 8:9</strong><br><br>You, however, are not in the realm of the flesh but are in the realm of the Spirit, if indeed the Spirit of God lives in you. And if anyone does not have the Spirit of Christ, they do not belong to Christ.`
+                break
+                case 11:
+                versicle.innerHTML = `<strong>Romans 8:18</strong><br><br>I consider that our present sufferings are not worth comparing with the glory that will be revealed in us.`
+                break
+                case 12:
+                versicle.innerHTML = `<strong>Romans 8:31</strong><br><br>What, then, shall we say in response to these things? If God is for us, who can be against us?`
+                break
+                case 13:
+                versicle.innerHTML = `<strong>Romans 8:35</strong><br><br>Who shall separate us from the love of Christ? Shall trouble or hardship or persecution or famine or nakedness or danger or sword?`
+                break
+                case 14:
+                versicle.innerHTML = `<strong>John 14:1</strong><br><br>Do not let your hearts be troubled. You believe in God; believe also in me. `
+                break
+                case 15:
+                versicle.innerHTML = `<strong>John 14:2</strong><br><br> My Father’s house has many rooms; if that were not so, would I have told you that I am going there to prepare a place for you?`
+                break
+                case 16:
+                versicle.innerHTML = `<strong>John 14:15</strong><br><br>If you love me, keep my commands.`
+                break
+                case 17:
+                versicle.innerHTML = `<strong>John 14:21</strong><br><br>Whoever has my commands and keeps them is the one who loves me. The one who loves me will be loved by my Father, and I too will love them and show myself to them.`
+                break
+                case 18:
+                versicle.innerHTML = `<strong>John 14:18</strong><br><br> I will not leave you as orphans; I will come to you.`
+                break
+                case 19:
+                versicle.innerHTML = `<strong>John 14:27</strong><br><br>Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.`
+                break
+                case 20:
+                versicle.innerHTML = `<strong>John 14:28</strong><br><br>You heard me say, ‘I am going away and I am coming back to you.’ If you loved me, you would be glad that I am going to the Father, for the Father is greater than I.`
+                break
+                case 21:
+                versicle.innerHTML = `<strong>Ephesians 6:1</strong><br><br>Children, obey your parents in the Lord, for this is right. `
+                break
+                case 22:
+                versicle.innerHTML = `<strong>Ephesians 6:11</strong><br><br> Put on the full armor of God, so that you can take your stand against the devil’s schemes.`
+                break
+                case 23:
+                versicle.innerHTML = `<strong>Ephesians 6:12</strong><br><br> For our struggle is not against flesh and blood, but against the rulers, against the authorities, against the powers of this dark world and against the spiritual forces of evil in the heavenly realms. `
+                break
+default:
+versicle.innerHTML=`<strong>System error!</strong>`
+break
+            }
+            break
+            case 2:
+            dia ='Tuesday'
+            var ask = prompt(`Brother/Sister ${nome}, what is a life with
+
+purpose?`)
+            switch (hora){
+                case 00:
+versicle.innerHTML = `<strong>Psalms 1:1</strong><br><br>Blessed is the one
+    who does not walk in step with the wicked
+or stand in the way that sinners take
+    or sit in the company of mockers.`
+                break
+                case 01:
+versicle.innerHTML = `<strong>Psalms 13:1</strong><br><br>How long, Lord? Will you forget me forever?
+    How long will you hide your face from me?
+`
+                break
+                case 02:
+versicle.innerHTML = `<strong>Psalms 46:1</strong><br><br>God is our refuge and strength,
+    an ever-present help in trouble.`
+                break
+                case 03:
+versicle.innerHTML = `<strong>Psalms 46:7</strong><br><br>The Lord Almighty is with us;
+    the God of Jacob is our fortress.`
+                break
+                case 04:
+versicle.innerHTML = `<strong>Psalms 46:9-10</strong><br><br><small>9</small> He makes wars cease
+    to the ends of the earth.
+He breaks the bow and shatters the spear;
+    he burns the shields with fire.<br>
+<small>10</small> He says, “Be still, and know that I am God;
+    I will be exalted among the nations,
+    I will be exalted in the earth.”`
+                break
+                case 05:
+versicle.innerHTML = `<strong>Psalms 91:1</strong><br><br>Whoever dwells in the shelter of the Most High
+    will rest in the shadow of the Almighty.`
+                break
+                case 06:
+versicle.innerHTML = `<strong>Psalms 91:7</strong><br><br>A thousand may fall at your side,
+    ten thousand at your right hand,
+    but it will not come near you.`
+                break
+                case 07:
+versicle.innerHTML = `<strong>Psalms 91:8</strong><br><br>You will only observe with your eyes
+    and see the punishment of the wicked.`
+                break
+                case 08:
+versicle.innerHTML = `<strong>Psalms 91:13</strong><br><br>You will tread on the lion and the cobra;
+    you will trample the great lion and the serpent.`
+                break
+                case 09:
+versicle.innerHTML = `<strong>Psalms 91:14-16</strong><br><br><small>14</small> “Because he loves me,” says the Lord, “I will rescue him;
+    I will protect him, for he acknowledges my name.<br>
+<small>15</small> He will call on me, and I will answer him;
+    I will be with him in trouble,
+    I will deliver him and honor him.<br>
+<small>16</small> With long life I will satisfy him
+    and show him my salvation."`
+                break
+                case 10:
+versicle.innerHTML = `<strong>Isaiah 40:18</strong><br><br>With whom, then, will you compare God?
+    To what image will you liken him?`
+                break
+                case 11:
+versicle.innerHTML = `<strong>Isaiah 40:28</strong><br><br>Do you not know?
+    Have you not heard?
+The Lord is the everlasting God,
+    the Creator of the ends of the earth.
+He will not grow tired or weary,
+    and his understanding no one can fathom.`
+                break
+                case 12:
+versicle.innerHTML = `<strong>Isaiah 40:30-31</strong><br><br><small>30</small> Even youths grow tired and weary,
+    and young men stumble and fall;<br>
+<small>31</small> but those who hope in the Lord
+    will renew their strength.
+They will soar on wings like eagles;
+    they will run and not grow weary,
+    they will walk and not be faint.`
+                break
+                case 13:
+versicle.innerHTML = `<strong>Isaiah 40:29</strong><br><br>He gives strength to the weary
+    and increases the power of the weak.`
+                break
+                case 14:
+versicle.innerHTML = `<strong>Isaiah 43:1</strong><br><br>But now, this is what the Lord says—
+    he who created you, Jacob,
+    he who formed you, Israel:
+“Do not fear, for I have redeemed you;
+    I have summoned you by name; you are mine.`
+                break
+                case 15:
+versicle.innerHTML = `<strong>Isaiah 43:2</strong><br><br>When you pass through the waters,
+    I will be with you;
+and when you pass through the rivers,
+    they will not sweep over you.
+When you walk through the fire,
+    you will not be burned;
+    the flames will not set you ablaze.`
+                break
+                case 16:
+versicle.innerHTML = `<strong>Isaiah 43:5</strong><br><br>Do not be afraid, for I am with you;
+    I will bring your children from the east
+    and gather you from the west.`
+                break
+                case 17:
+versicle.innerHTML = `<strong>Isaiah 43:4</strong><br><br>Since you are precious and honored in my sight,
+    and because I love you,
+I will give people in exchange for you,
+    nations in exchange for your life.`
+                break
+                case 18:
+versicle.innerHTML = `<strong>Isaiah 43:18-19</strong><br><br><small>18</small> Forget the former things;
+    do not dwell on the past.<br>
+<small>19</small> See, I am doing a new thing!
+    Now it springs up; do you not perceive it?
+I am making a way in the wilderness
+    and streams in the wasteland.`
+                break
+                case 19:
+versicle.innerHTML = `<strong>Isaiah 43:24</strong><br><br>You have not bought any fragrant calamus for me,
+    or lavished on me the fat of your sacrifices.
+But you have burdened me with your sins
+    and wearied me with your offenses.`
+                break
+                case 20:
+versicle.innerHTML = `<strong>1 Peter 1:13</strong><br><br>Therefore, with minds that are alert and fully sober, set your hope on the grace to be brought to you when Jesus Christ is revealed at his coming.`
+                break
+                case 21:
+versicle.innerHTML = `<strong>1 Peter 1:22</strong><br><br>Now that you have purified yourselves by obeying the truth so that you have sincere love for each other, love one another deeply, from the heart.`
+                break
+                case 22:
+versicle.innerHTML = `<strong>1 Peter 1:21</strong><br><br> Through him you believe in God, who raised him from the dead and glorified him, and so your faith and hope are in God.`
+                break
+                case 23:
+versicle.innerHTML = `<strong>1 John 4:6</strong><br><br>We are from God, and whoever knows God listens to us; but whoever is not from God does not listen to us. This is how we recognize the Spirit of truth and the spirit of falsehood.`
+                break
+default:
+versicle.innerHTML=`<strong>System error!</strong>`
+break
+            }
+            break
+            case 3:
+            var ask = prompt(`Brother)Sister ${nome}, what is the meaning of the gospel
+
+in your life?`)
+            switch (hora){
+                case 00:
+                versicle.innerHTML = `<strong>Jeremiah 1:5-6</strong><br><br><small>5</small> “Before I formed you in the womb I knew you,
+                before you were born I set you apart;
+                I appointed you as a prophet to the nations.”
+            <br>
+            <small>6</small> “Alas, Sovereign Lord,” I said, “I do not know how to speak; I am too young.”`
+                break
+                case 01:
+                versicle.innerHTML = `<strong>Jeremiah 1:7-8</strong><br><br><small>7</small> But the Lord said to me, “Do not say, ‘I am too young.’ You must go to everyone I send you to and say whatever I command you.<br> <small>8</small> Do not be afraid of them, for I am with you and will rescue you,” declares the Lord.`
+                break
+                case 02:
+                versicle.innerHTML = `<strong>Jeremiah 2:13</strong><br><br>My people have committed two sins:
+                They have forsaken me,
+                    the spring of living water,
+                and have dug their own cisterns,
+                    broken cisterns that cannot hold water.`
+                break
+                case 03:
+                versicle.innerHTML = `<strong>Jeremiah 2:19</strong><br><br>Your wickedness will punish you;
+                your backsliding will rebuke you.
+            Consider then and realize
+                how evil and bitter it is for you
+            when you forsake the Lord your God
+                and have no awe of me,”
+            declares the Lord, the Lord Almighty.`
+                break
+                case 04:
+                versicle.innerHTML = `<strong>Jremiah 2:21</strong><br><br>I had planted you like a choice vine
+                of sound and reliable stock.
+            How then did you turn against me
+                into a corrupt, wild vine?`
+                break
+                case 05:
+                versicle.innerHTML = `<strong>Jeremiah 2:27</strong><br><br>They say to wood, ‘You are my father,’
+                and to stone, ‘You gave me birth.’
+            They have turned their backs to me
+                and not their faces;
+            yet when they are in trouble, they say,
+                ‘Come and save us!’`
+                break
+                case 06:
+                versicle.innerHTML = `<strong>John 15:1</strong><br><br>I am the true vine, and my Father is the gardener.`
+                break
+                case 07:
+                versicle.innerHTML = `<strong>John 15:4</strong><br><br> Remain in me, as I also remain in you. No branch can bear fruit by itself; it must remain in the vine. Neither can you bear fruit unless you remain in me.`
+                break
+                case 08:
+                versicle.innerHTML = `<strong>John 15:5</strong><br><br>I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing.`
+                break
+                case 09:
+                versicle.innerHTML = `<strong>John 15:10</strong><br><br> If you keep my commands, you will remain in my love, just as I have kept my Father’s commands and remain in his love.`
+                break
+                case 10:
+                versicle.innerHTML = `<strong>John 15:14</strong><br><br>You are my friends if you do what I command.`
+                break
+                case 11:
+                versicle.innerHTML = `<strong>John 15:12</strong><br><br>My command is this: Love each other as I have loved you.`
+                break
+                case 12:
+                versicle.innerHTML = `<strong>John 15:15</strong><br><br>I no longer call you servants, because a servant does not know his master’s business. Instead, I have called you friends, for everything that I learned from my Father I have made known to you. `
+                break
+                case 13:
+                versicle.innerHTML = `<strong>John 15:16</strong><br><br>You did not choose me, but I chose you and appointed you so that you might go and bear fruit—fruit that will last—and so that whatever you ask in my name the Father will give you.`
+                break
+                case 14:
+                versicle.innerHTML = `<strong>John 15:19</strong><br><br> If you belonged to the world, it would love you as its own. As it is, you do not belong to the world, but I have chosen you out of the world. That is why the world hates you`
+                break
+                case 15:
+                versicle.innerHTML = `<strong>John 15:22</strong><br><br> If I had not come and spoken to them, they would not be guilty of sin; but now they have no excuse for their sin.`
+                break
+                case 16:
+                versicle.innerHTML = `<strong>John 15:24</strong><br><br>If I had not done among them the works no one else did, they would not be guilty of sin. As it is, they have seen, and yet they have hated both me and my Father.`
+                break
+                case 17:
+                versicle.innerHTML = `<strong>John 3:16</strong><br><br>For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.`
+                break
+                case 18:
+                versicle.innerHTML = `<strong>John 3:17</strong><br><br>For God did not send his Son into the world to condemn the world, but to save the world through him.`
+                break
+                case 19:
+                versicle.innerHTML = `<strong>John 3:18</strong><br><br>Whoever believes in him is not condemned, but whoever does not believe stands condemned already because they have not believed in the name of God’s one and only Son.`
+                break
+                case 20:
+                versicle.innerHTML = `<strong>John 3:20</strong><br><br>Everyone who does evil hates the light, and will not come into the light for fear that their deeds will be exposed.`
+                break
+                case 21:
+                versicle.innerHTML = `<strong>John 3:36</strong><br><br>Whoever believes in the Son has eternal life, but whoever rejects the Son will not see life, for God’s wrath remains on them.`
+                break
+                case 22:
+                versicle.innerHTML = `<strong>Job 1:21</strong><br><br> and said:
+
+                “Naked I came from my mother’s womb,
+                    and naked I will depart.
+                The Lord gave and the Lord has taken away;
+                    may the name of the Lord be praised.”`
+                break
+                case 23:
+                versicle.innerHTML = `<strong>Job 1:9</strong><br><br>Does Job fear God for nothing?” Satan replied.`
+                break
+default:
+versicle.innerHTML=`<strong>System error!</strong>`
+break
+            }
+            break
+            case 4:
+            dia = 'Thursday'
+            var ask = prompt(`Brother/Sister ${nome}, How has your relationship with God been?
+            Have you been so barren that you haven't been able to bear any children?`)
+            switch (hora){
+                case 00:
+versicle.innerHTML=`<strong>Proverbs 1:7</strong><br><br>The fear of the Lord is the beginning of knowledge,
+    but fools despise wisdom and instruction.`
+                break
+                case 01:
+versicle.innerHTML=`<strong>Proverbs 1:8</strong><br><br>Listen, my son, to your father’s instruction
+    and do not forsake your mother’s teaching.`
+                break
+                case 02:
+versicle.innerHTML=`<strong>Proverbs 1:10</strong><br><br>My son, if sinful men entice you,
+    do not give in to them.`
+                break
+                case 03:
+versicle.innerHTML=`<strong>Proverbs 1:22</strong><br><br>How long will you who are simple love your simple ways?
+    How long will mockers delight in mockery
+    and fools hate knowledge?`
+                break
+                case 04:
+versicle.innerHTML=`<strong>Proverbs 8:1</strong><br><br>Does not wisdom call out?
+    Does not understanding raise her voice?`
+                break
+                case 05:
+versicle.innerHTML=`<strong>Proverbs 8:32</strong><br><br>Now then, my children, listen to me;
+    blessed are those who keep my ways.`
+                break
+                case 06:
+versicle.innerHTML=`<strong>Proverbs 7:1-2</strong><br><br><small>1</small> My son, keep my words
+    and store up my commands within you.
+<small>2</small> Keep my commands and you will live;
+    guard my teachings as the apple of your eye.`
+                break
+                case 07:
+versicle.innerHTML=`<strong>Proverbs 17:1</strong><br><br>Better a dry crust with peace and quiet
+    than a house full of feasting, with strife.`
+                break
+                case 08:
+versicle.innerHTML=`<strong>Proverbs 17:5</strong><br><br>Whoever mocks the poor shows contempt for their Maker;
+    whoever gloats over disaster will not go unpunished.`
+                break
+                case 09:
+versicle.innerHTML=`<strong>Proverbs 17:9</strong><br><br>Whoever would foster love covers over an offense,
+    but whoever repeats the matter separates close friends.`
+                break
+                case 10:
+versicle.innerHTML=`<strong>Proverbs 17:17</strong><br><br>A friend loves at all times,
+    and a brother is born for a time of adversity.`
+                break
+                case 11:
+versicle.innerHTML=`<strong>Revelation 22:5</strong><br><br>There will be no more night. They will not need the light of a lamp or the light of the sun, for the Lord God will give them light. And they will reign for ever and ever.`
+                break
+                case 12:
+versicle.innerHTML=`<strong>Revelation 22:3</strong><br><br> No longer will there be any curse. The throne of God and of the Lamb will be in the city, and his servants will serve him.`
+                break
+                case 13:
+versicle.innerHTML=`<strong>Proverbs 17:19</strong><br><br>Whoever loves a quarrel loves sin;
+    whoever builds a high gate invites destruction.`
+                break
+                case 14:
+versicle.innerHTML=`<strong>Proverbs 17:24</strong><br><br>A discerning person keeps wisdom in view,
+    but a fool’s eyes wander to the ends of the earth.`
+                break
+                case 15:
+versicle.innerHTML=`<strong>Proverbs 17:28</strong><br><br>Even fools are thought wise if they keep silent,
+    and discerning if they hold their tongues.`
+                break
+                case 16:
+versicle.innerHTML=`<strong>Proverbs 15:3</strong><br><br>The eyes of the Lord are everywhere,
+    keeping watch on the wicked and the good.`
+                break
+                case 17:
+versicle.innerHTML=`<strong>Proverbs 15:8</strong><br><br>The Lord detests the sacrifice of the wicked,
+    but the prayer of the upright pleases him.`
+                break
+                case 18:
+versicle.innerHTML=`<strong>Proverbs 15:12</strong><br><br>Mockers resent correction,
+    so they avoid the wise.`
+                break
+                case 19:
+versicle.innerHTML=`<strong>Proverbs 15:13</strong><br><br>A happy heart makes the face cheerful,
+    but heartache crushes the spirit.`
+                break
+                case 20:
+versicle.innerHTML=`<strong>Proverbs 15:16</strong><br><br>Better a little with the fear of the Lord
+    than great wealth with turmoil`
+                break
+                case 21:
+versicle.innerHTML=`<strong>Proverbs 15:20</strong><br><br>A wise son brings joy to his father,
+    but a foolish man despises his mother.`
+                break
+                case 22:
+versicle.innerHTML=`<strong>Proverbs 15:26</strong><br><br>The Lord detests the thoughts of the wicked,
+    but gracious words are pure in his sight.`
+                break
+                case 23:
+versicle.innerHTML=`<strong>Proverbs 12:28</strong><br><br>In the way of righteousness there is life;
+    along that path is immortality.`
+                break
+default:
+versicle.innerHTML=`<strong>System error!</strong>`
+break
+            }
+            break
+            case 5:
+            dia = 'Friday'
+            var ask = prompt(`Brother/Sister ${nome}, are you fighting the good fight?`)
+            switch (hora){
+                case 00:
+versicle.innerHtml=`<strong>Proverbs 12:1</strong><br><br>Whoever loves discipline loves knowledge,
+    but whoever hates correction is stupid.`
+                break
+                case 01:
+versicle.innerHtml=`<strong>Proverbs 12:4</strong><br><br>A wife of noble character is her husband’s crown,
+    but a disgraceful wife is like decay in his bones.`
+                break
+                case 02:
+versicle.innerHtml=`<strong>Proverbs 12:9</strong><br><br>Better to be a nobody and yet have a servant
+    than pretend to be somebody and have no food.`
+                break
+                case 03:
+versicle.innerHtml=`<strong>Proverbs 12:17</strong><br><br>An honest witness tells the truth,
+    but a false witness tells lies.`
+                break
+                case 04:
+versicle.innerHtml=`<strong>Proverbs 12:26</strong><br><br>The righteous choose their friends carefully,
+    but the way of the wicked leads them astray.`
+                break
+                case 05:
+versicle.innerHtml=`<strong>Proverbs 25:15</strong><br><br>Through patience a ruler can be persuaded,
+    and a gentle tongue can break a bone.`
+                break
+                case 06:
+versicle.innerHtml=`<strong>Proverbs 25:21-22</strong><br><br><small>21</small> If your enemy is hungry, give him food to eat;
+    if he is thirsty, give him water to drink.<br>
+<small>22</small> In doing this, you will heap burning coals on his head,
+    and the Lord will reward you.`
+                break
+                case 07:
+versicle.innerHtml=`<strong>Proverbs 25:24</strong><br><br>Better to live on a corner of the roof
+    than share a house with a quarrelsome wife.`
+                break
+                case 08:
+versicle.innerHtml=`<strong>Proverbs 25:28</strong><br><br>Like a city whose walls are broken through
+    is a person who lacks self-control.`
+                break
+                case 09:
+versicle.innerHtml=`<strong></strong><br><br>`
+                break
+                case 10:
+versicle.innerHtml=`<strong>Proverbs 18:4</strong><br><br>The words of the mouth are deep waters,
+    but the fountain of wisdom is a rushing stream.`
+                break
+                case 11:
+versicle.innerHtml=`<strong>Proverbs 18:10</strong><br><br>The name of the Lord is a fortified tower;
+    the righteous run to it and are safe.`
+                break
+                case 12:
+versicle.innerHtml=`<strong>Proverbs 18:13</strong><br><br>To answer before listening—
+    that is folly and shame.`
+                break
+                case 13:
+versicle.innerHtml=`<strong>Proverbs 9:7</strong><br><br>Whoever corrects a mocker invites insults;
+    whoever rebukes the wicked incurs abuse.`
+                break
+                case 14:
+versicle.innerHtml=`<strong>Proverbs 9:8</strong><br><br>Do not rebuke mockers or they will hate you;
+    rebuke the wise and they will love you.`
+                break
+                case 15:
+versicle.innerHtml=`<strong>Proverbs 9:10</strong><br><br>The fear of the Lord is the beginning of wisdom,
+    and knowledge of the Holy One is understanding.`
+                break
+                case 16:
+versicle.innerHtml=`<strong>Proverbs 9:12</strong><br><br>If you are wise, your wisdom will reward you;
+    if you are a mocker, you alone will suffer.`
+                break
+                case 17:
+versicle.innerHtml=`<strong>Ecclesiastes 3:1</strong><br><br>There is a time for everything,
+    and a season for every activity under the heavens.`
+                break
+                case 18:
+versicle.innerHtml=`<strong>Ecclesiastes 7:1</strong><br><br>A good name is better than fine perfume,
+    and the day of death better than the day of birth.`
+                break
+                case 19:
+versicle.innerHtml=`<strong>Ecclesiastes 7:4</strong><br><br>The heart of the wise is in the house of mourning,
+    but the heart of fools is in the house of pleasure`
+                break
+                case 20:
+versicle.innerHtml=`<strong>Ecclesiastes 7:7</strong><br><br>Extortion turns a wise person into a fool,
+    and a bribe corrupts the heart.`
+                break
+                case 21:
+versicle.innerHtml=`<strong>Ecclesiastes 7:12</strong><br><br>Wisdom is a shelter
+    as money is a shelter,
+but the advantage of knowledge is this:
+    Wisdom preserves those who have it.`
+                break
+                case 22:
+versicle.innerHtml=`<strong>Ecclesiastes 7:14</strong><br><br>When times are good, be happy;
+    but when times are bad, consider this:
+God has made the one
+    as well as the other.
+Therefore, no one can discover
+    anything about their future.`
+                break
+                case 23:
+versicle.innerHtml=`<strong>Proverbs 7:20</strong><br><br>Indeed, there is no one on earth who is righteous,
+    no one who does what is right and never sins.`
+                break
+default:
+versicle.innerHTML=`<strong>System error!</strong>`
+break
+            }
+            break
+            case 6:
+            dia = 'Saturday'
+            var ask = prompt(`Brother/Sister ${nome}, where is your cross?`)
+            switch (hora){
+                case 00:
+versicle.innerHTML=`<strong>Ecclesiastes 9:2</strong><br><br>All share a common destiny—the righteous and the wicked, the good and the bad, the clean and the unclean, those who offer sacrifices and those who do not.`
+                break
+                case 01:
+versicle.innerHTML=`<strong>Ecclesiastes 9:7</strong><br><br>Go, eat your food with gladness, and drink your wine with a joyful heart, for God has already approved what you do.`
+                break
+                case 02:
+versicle.innerHTML=`<strong>Ecclesiastes 9:11</strong><br><br> I have seen something else under the sun:
+
+The race is not to the swift
+    or the battle to the strong,
+nor does food come to the wise
+    or wealth to the brilliant
+    or favor to the learned;
+but time and chance happen to them all.`
+                break
+                case 03:
+versicle.innerHTML=`<strong>Ecclesiastes 9:14-16</strong><br><br><small>14</small> There was once a small city with only a few people in it. And a powerful king came against it, surrounded it and built huge siege works against it. <small>15</small> Now there lived in that city a man poor but wise, and he saved the city by his wisdom. But nobody remembered that poor man. <small>16</small> So I said, “Wisdom is better than strength.” But the poor man’s wisdom is despised, and his words are no longer heeded.`
+                break
+                case 04:
+versicle.innerHTML=`<strong>Ecclesiastes 9:18</strong><br><br>Wisdom is better than weapons of war,
+    but one sinner destroys much good.`
+                break
+                case 05:
+versicle.innerHTML=`<strong>Ecclesiastes 10:5-6</strong><br><br><small>5</small> There is an evil I have seen under the sun,
+    the sort of error that arises from a ruler:<br>
+<small>6</small> Fools are put in many high positions,
+    while the rich occupy the low ones.`
+                break
+                case 06:
+versicle.innerHTML=`<strong>Ecclesiastes 11:1</strong><br><br>Ship your grain across the sea;
+    after many days you may receive a return.`
+                break
+                case 07:
+versicle.innerHTML=`<strong>Ecclesiastes 11:8</strong><br><br>However many years anyone may live,
+    let them enjoy them all.
+But let them remember the days of darkness,
+    for there will be many.
+    Everything to come is meaningless.`
+                break
+                case 08:
+versicle.innerHTML=`<strong>Ecclesiastes 9:11</strong><br><br>You who are young, be happy while you are young,
+    and let your heart give you joy in the days of your youth.
+Follow the ways of your heart
+    and whatever your eyes see,
+but know that for all these things
+    God will bring you into judgment.`
+                break
+                case 09:
+versicle.innerHTML=`<strong>Joel 2:13</strong><br><br>Rend your heart
+    and not your garments.
+Return to the Lord your God,
+    for he is gracious and compassionate,
+slow to anger and abounding in love,
+    and he relents from sending calamity.`
+                break
+                case 10:
+versicle.innerHTML=`<strong>Joel 2:19</strong><br><br>The Lord replied to them:
+
+“I am sending you grain, new wine and olive oil,
+    enough to satisfy you fully;
+never again will I make you
+    an object of scorn to the nations.`
+                break
+                case 11:
+versicle.innerHTML=`<strong>Joel 2:28</strong><br><br>And afterward,
+    I will pour out my Spirit on all people.
+Your sons and daughters will prophesy,
+    your old men will dream dreams,
+    your young men will see visions.`
+                break
+                case 12:
+versicle.innerHTML=`<strong>Joel 2:32</strong><br><br>And everyone who calls
+    on the name of the Lord will be saved;
+for on Mount Zion and in Jerusalem
+    there will be deliverance,
+    as the Lord has said,
+even among the survivors
+    whom the Lord calls.`
+                break
+                case 13:
+versicle.innerHTML=`<strong>Habakkuk 3:17-18</strong><br><br><small>17</small> Though the fig tree does not bud
+    and there are no grapes on the vines,
+though the olive crop fails
+    and the fields produce no food,
+though there are no sheep in the pen
+    and no cattle in the stalls,<br>
+<small>18</small> yet I will rejoice in the Lord,
+    I will be joyful in God my Savior.`
+                break
+                case 14:
+versicle.innerHTML=`<strong>Habakkuk 3:19</strong><br><br>The Sovereign Lord is my strength;
+    he makes my feet like the feet of a deer,
+    he enables me to tread on the heights.`
+                break
+                case 15:
+versicle.innerHTML=`<strong>1 John 4:16</strong><br><br>And so we know and rely on the love God has for us.
+God is love. Whoever lives in love lives in God, and God in them.`
+                break
+                case 16:
+versicle.innerHTML=`<strong>1 John 4:15</strong><br><br>If anyone acknowledges that Jesus is the Son of God, God lives in them and they in God.`
+                break
+                case 17:
+versicle.innerHTML=`<strong>Philippians 4:12-13</strong><br><br><small>12</small> I know what it is to be in need, and I know what it is to have plenty. I have learned the secret of being content in any and every situation, whether well fed or hungry, whether living in plenty or in want. 13 I can do all this through him who gives me strength.`
+                break
+                case 18:
+versicle.innerHTML=`<strong>Philippians 2:12-13</strong><br><br><small>12</small> Therefore, my dear friends, as you have always obeyed—not only in my presence, but now much more in my absence—continue to work out your salvation with fear and trembling, <small>13</small> for it is God who works in you to will and to act in order to fulfill his good purpose.`
+                break
+                case 19:
+versicle.innerHTML=`<strong>Revelation 3:11</strong><br><br>I am coming soon. Hold on to what you have, so that no one will take your crown.`
+                break
+                case 20:
+versicle.innerHTML=`<strong>Revelation 3:19</strong><br><br>Those whom I love I rebuke and discipline. So be earnest and repent.`
+                break
+                case 21:
+versicle.innerHTML=`<strong>Revelation 3:21</strong><br><br>To the one who is victorious, I will give the right to sit with me on my throne, just as I was victorious and sat down with my Father on his throne.`
+                break
+                case 22:
+versicle.innerHTML=`<strong>Revelation 22:12</strong><br><br>Look, I am coming soon! My reward is with me, and I will give to each person according to what they have done.`
+                break
+                case 23:
+versicle.innerHTML=`<strong>Revelation 22:14-15</strong><br><br><small>14</small> “Blessed are those who wash their robes, that they may have the right to the tree of life and may go through the gates into the city. <small>15</small> Outside are the dogs, those who practice magic arts, the sexually immoral, the murderers, the idolaters and everyone who loves and practices falsehood.`
+                break
+default:
+versicle.innerHTML=`<strong>System error!</strong>`
+break
+            }
+            break
+default:
+versicle.innerHTML=`<strong>System error!</strong>`
+break
+        }
+
+
+        </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+header{
+    margin: auto;
+    max-width: 800px;
+    text-align: center;
+    border: 1px solid black;
+}
+main{
+    margin: auto;
+    max-width: 800px;
+    border: 1px solid black;
+}
+form{
+    width: 200px;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid black;
+}
+input, select{
+    outline: none;
+}
+footer{
+    margin: auto;
+    max-width: 800px;
+    border: 1px solid black;
+    height: 30px;
+}
+

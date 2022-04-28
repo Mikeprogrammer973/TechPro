@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+#op_conta{
+    display: none;
+}
+#btn_user_profile:hover > ul{
+    display: block;
+}
+#img_user_profile{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}

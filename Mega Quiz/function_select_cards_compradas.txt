@@ -1,0 +1,4 @@
+// Comando SQL para consultar as cartas compradas de cada usuários
+
+SELECT compras.compradores_id, shop.asks_cards FROM compras INNER JOIN shop
+WHERE compras.compradores_id = (SELECT id FROM users WHERE senha = 'e10adc3949ba59abbe56e057f20f883e') AND compras.compras_id = shop.id;
