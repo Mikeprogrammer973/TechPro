@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 24-Abr-2022 às 00:30
+-- Tempo de geração: 08-Maio-2022 às 05:03
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 7.4.26
 
@@ -38,6 +38,14 @@ CREATE TABLE IF NOT EXISTS `adms` (
   UNIQUE KEY `code_adm` (`code_adm`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `adms`
+--
+
+INSERT INTO `adms` (`code_adm`, `nome_completo`, `foto_perfil_adm`, `status`) VALUES
+('maria_db', 'Maria Santos', 'eu.png', 'C'),
+('mike_973', 'Mike Pascal', 'eu.png', 'C');
+
 -- --------------------------------------------------------
 
 --
@@ -54,6 +62,14 @@ CREATE TABLE IF NOT EXISTS `alunos` (
   `status` varchar(1) NOT NULL DEFAULT 'C',
   UNIQUE KEY `matricula` (`matricula`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `alunos`
+--
+
+INSERT INTO `alunos` (`code_escola`, `matricula`, `nome_completo`, `code_turma`, `foto_perfil_aluno`, `status`) VALUES
+('PB_007', '123581321', 'Priscilla Ferro', 'TPB_001', 'aluno.png', 'C'),
+('PB_007', '1501203005', 'Hope Morningstar Pascal', 'TPB_001', 'aluno.png', 'C');
 
 -- --------------------------------------------------------
 
@@ -72,6 +88,13 @@ CREATE TABLE IF NOT EXISTS `cargos_prof` (
   UNIQUE KEY `code_disciplina` (`code_disciplina`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `cargos_prof`
+--
+
+INSERT INTO `cargos_prof` (`code_escola`, `code_turma`, `code_prof`, `code_disciplina`, `nome_disciplina`, `status`) VALUES
+('PB_007', 'TPB_001', 'PPB_001', 'DPB_001', 'Matemática', 'C');
+
 -- --------------------------------------------------------
 
 --
@@ -82,11 +105,21 @@ DROP TABLE IF EXISTS `escolas`;
 CREATE TABLE IF NOT EXISTS `escolas` (
   `code_escola` varchar(100) NOT NULL,
   `nome_escola` varchar(120) NOT NULL,
+  `tipo_periodo` varchar(120) NOT NULL DEFAULT 'Semestre',
+  `qtd_periodo` int(11) NOT NULL DEFAULT '2',
   `foto_perfil_escola` varchar(120) NOT NULL,
   `code_adm_escola` varchar(100) NOT NULL,
   `status` varchar(1) NOT NULL DEFAULT 'C',
   UNIQUE KEY `code_escola` (`code_escola`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `escolas`
+--
+
+INSERT INTO `escolas` (`code_escola`, `nome_escola`, `tipo_periodo`, `qtd_periodo`, `foto_perfil_escola`, `code_adm_escola`, `status`) VALUES
+('PB_007', 'Paulo Bauer', 'Bimestre', 4, 'escola.png', 'maria_db', 'C'),
+('WH_007', 'Web Hacker', 'Trimestre', 4, 'escola.png', 'mike_973', 'C');
 
 -- --------------------------------------------------------
 
@@ -102,10 +135,10 @@ CREATE TABLE IF NOT EXISTS `info_alunos` (
   `code_disciplina` varchar(100) NOT NULL,
   `code_prof` varchar(100) NOT NULL,
   `periodo` varchar(120) NOT NULL,
-  `code_media` int(11) NOT NULL,
+  `code_media` int(11) NOT NULL AUTO_INCREMENT,
   `media` double NOT NULL,
   `status` varchar(1) NOT NULL DEFAULT 'C',
-  UNIQUE KEY `code_media` (`code_media`)
+  PRIMARY KEY (`code_media`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -136,12 +169,19 @@ CREATE TABLE IF NOT EXISTS `notas_alunos` (
   `code_disciplina` varchar(100) NOT NULL,
   `code_prof` varchar(100) NOT NULL,
   `periodo` varchar(120) NOT NULL,
-  `code_nota` int(11) NOT NULL,
+  `code_nota` int(11) NOT NULL AUTO_INCREMENT,
   `nota` double NOT NULL,
   `desc_nota` text,
   `status` varchar(1) NOT NULL DEFAULT 'C',
-  UNIQUE KEY `code_nota` (`code_nota`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`code_nota`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `notas_alunos`
+--
+
+INSERT INTO `notas_alunos` (`code_escola`, `code_turma`, `matricula`, `code_disciplina`, `code_prof`, `periodo`, `code_nota`, `nota`, `desc_nota`, `status`) VALUES
+('PB_007', 'TPB_001', '123581321', 'DPB_001', 'PPB_001', '1° Bimestre', 1, 9.87, 'Nota da prova sobre as inequações do 2° grau.', 'C');
 
 -- --------------------------------------------------------
 
@@ -159,6 +199,13 @@ CREATE TABLE IF NOT EXISTS `profs` (
   UNIQUE KEY `code_prof` (`code_prof`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `profs`
+--
+
+INSERT INTO `profs` (`code_escola`, `code_prof`, `nome_completo`, `foto_perfil_prof`, `status`) VALUES
+('PB_007', 'PPB_001', 'José da Silva Santos', 'prof.png', 'C');
+
 -- --------------------------------------------------------
 
 --
@@ -174,6 +221,13 @@ CREATE TABLE IF NOT EXISTS `turmas` (
   `status` varchar(1) NOT NULL DEFAULT 'C',
   UNIQUE KEY `code_turma` (`code_turma`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `turmas`
+--
+
+INSERT INTO `turmas` (`code_escola`, `code_turma`, `nome_turma`, `foto_perfil_turma`, `status`) VALUES
+('PB_007', 'TPB_007', '5° Fromager', 'turma.png', 'C');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

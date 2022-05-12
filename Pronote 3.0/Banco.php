@@ -1,16 +1,8 @@
 <?php
-    include_once("Interfaces_.php");
-    class Banco implements Banco_{
-        public $conection = null;
-        function Open_Conection_db(){
-            $conection = mysqli_connect("localhost", "root", "", "pronote");
-            if(!$conection){
-                die(trigger_error("Não foi possível conectar ao Banco de Dados 'pronote.db'!"));
-            }
-            return $conection;
-        }
+    class Banco{
+        
         function Select($tabela, $reference){
-            $conection = $this -> Open_Conection_db();
+            include("connection_db.php");
             $result = array();
             $sql = "SELECT * FROM {$tabela} {$reference}";
             if($query = mysqli_query($conection,$sql)){
@@ -24,7 +16,7 @@
             mysqli_close($conection);
         }
         function Insert($sql){
-            $conection = $this -> Open_Conection_db();
+            include("connection_db.php");
             if(mysqli_query($conection, $sql)){
                 header("location:index.php?info=ok");
             }else{
