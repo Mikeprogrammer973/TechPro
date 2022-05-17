@@ -14,7 +14,7 @@ if($function == "adm"){
             header("location:homepage.php");
         }
     }else{
-        print "CA incorreto!";
+        header("location:index.php?error_login=ca");
     }
 }else if($function == "prof"){
 

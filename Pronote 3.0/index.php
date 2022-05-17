@@ -1,3 +1,8 @@
+<?php
+
+@$error = $_REQUEST["error_login"];
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,6 +17,10 @@
     <main>        
         <form method="post" action="verify_login.php">
             <h1>Login</h1>
+              <?php if($error == "ca"){
+                  print "<p>Código de Acesso incorreto!</p>";
+              }
+              ?> 
             <p>
                 Código de Acesso:<br>
                 <input type="text" name="code" required max="100" placeholder="Código de Acesso...">
