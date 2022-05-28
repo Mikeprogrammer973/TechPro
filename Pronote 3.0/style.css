@@ -2,9 +2,13 @@
 
 header{
     margin: auto;
-    max-width: 800px;
+    max-width: 00px;
     text-align: center;
-    border: 1px solid black;
+    border: 10px solid black;
+}
+.perfil{
+    width: 20px;
+    height: 20px;
 }
 main{
     margin: auto;

@@ -11,7 +11,7 @@ if($function == "adm"){
     if($adm){
         if($adm[0]["code_adm"] == $code){
             $_SESSION["logado"] = true;
-            header("location:homepage.php");
+            header("location:homepage.php?tipo=$function&code=$code");
         }
     }else{
         header("location:index.php?error_login=ca");
