@@ -26,12 +26,17 @@
             return $info;
             mysqli_close($conection);
         }
-        function Update($tabela, $reference){
-
+        function Update($sql){
+            include("connection_db.php");
+            mysqli_query($conection, $sql);
+            mysqli_close($conection);
         }
         function Delete($tabela, $reference){
-
+            include("connection_db.php");
+            mysqli_query($conection, $sql);
+            mysqli_close($conection);
         }
+
     }
 
 ?>

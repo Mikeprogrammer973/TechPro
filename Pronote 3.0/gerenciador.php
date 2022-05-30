@@ -1,19 +1,19 @@
 <?php
 
 @$tipo = $_REQUEST["tipo"];
-@$code = $_REQUEST["code"];
-@$info_gerencia = $_REQUEST["info_gerencia"];
+@$id = $_REQUEST['id'];
 
 ?>
-<!doctype html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pronote 3.0 - Homepage</title>
-        <style>
-            header{
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar <?php if($tipo == "escola"){
+        echo "Escolas";
+    }  ?></title>
+    <style>
+        header{
                 margin: auto;
                 padding: 5px;
                 max-width: 700px;
@@ -100,14 +100,7 @@
                 min-width: 250px;
                 border: 1px solid black;
                 padding: 20px;
-            }
-            #info_gerencia{
-                text-align: center;
-                font: bold 3vh monospace;
-                color: green;
-                border: none;
-                padding: 10px;
-                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.753);
+                font: bold 2.5vh monospace;
             }
             footer{
                 margin: auto;
@@ -115,12 +108,48 @@
                 min-width: 250px;
                 border: 1px solid black;
                 height: 30px;
-            }            
-
-        </style>
-    </head>
-    <body>
-        <header>
+            } 
+            #data_info{
+                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
+                padding: 10px;
+                width: 500px;
+                text-align:center;
+                margin: auto;
+            }
+            input{
+                text-align:center;
+                outline: none;
+                font: italic 2.5vh monospace;
+            }
+            input:hover{
+                background-color: aliceblue;
+                font: bold 2.5vh monospace;
+            }
+            #data_gerencia{
+                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
+                padding: 10px;
+                width: 500px;
+                text-align:center;
+                margin: auto;
+            }
+            .gerencia_btn{
+                outline: none;
+                border: none;
+                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
+                padding: 5px;
+                margin: 10px;
+                font: bold 2.5vh monospace;
+                color: teal;
+                background-color: whitesmoke;
+            }
+            .gerencia_btn:hover{
+                color: whitesmoke;
+                background-color: teal;
+            }
+    </style>
+</head>
+<body>
+<header>
             <nav id="titre">
                 <h1 id="titre_header">Pronote 3.0
                 <a id="l_perfil" href="index.php" ><button class="perfil" id="btn_perfil"><img id="img_perfil" class="perfil" src="./Img´s/1646424599.jpg"></button></a>
@@ -139,47 +168,38 @@
             </nav>
         </header>
         <main>
-            <p id="info_gerencia"><?php if($info_gerencia == "arquivar"){
-                print "Escola Arquivada com sucesso!";
-            }else if($info_gerencia == "update"){
-                print "Dados Atualizados com sucesso!";
-            }else if($info_gerencia == "remover"){
-                print "Escola Removida com sucesso!";
-            } ?></p>
-            <?php
-                include("Banco.php");
-                $banco = new Banco();
-                if($tipo == "adm"){
-                    $escolas = $banco -> Select("escolas", "WHERE code_adm_escola = '".$code."' AND status = 'C'");
-                    if($escolas){
-                        for($c = 0; $c < count($escolas); $c++){
-                            $id = $escolas[$c]["code_escola"];
-                            print "<div style='border: none; padding: 10px; width: 250px; display> flex; flex-wrap:wrap; box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.753)'>
-                            <a href='gerenciador.php?tipo=escola&id=$id'><img style='width: 100px; height: 100px;' src='./Img´s/desenho.png'></a>
-                            <a href='gerenciador.php?tipo=escola&id=$id'><button id='escola$c' onmouseenter='ativo($c)' onmouseout='inativo($c)' style='cursor:pointer; padding: 15px; border: none; box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453); outline: none; color: teal; background-color: azure;'>".$escolas[$c]["nome_escola"]."</button></a>
-                            </div>";
-                        }
+            <section id="data_info">
+                <?php
+
+                    include_once("Banco.php");
+
+                    $banco = new Banco();
+
+                    $info_escola = $banco -> Select("escolas", "WHERE code_escola = '".$id."'");
+
+                    if($info_escola){
+                        $nome = $info_escola[0]['nome_escola'];
+                        $tp = $info_escola[0]['tipo_periodo'];
+                        $qp = $info_escola[0]['qtd_periodo'];
+                        $status = $info_escola[0]['status'];
+                        print "<form name='gerencia' action='atualizar.php'>
+                            <input style='display:none;' type='text' value='escola' name='tipo'>
+                            <p>Cód. Acesso..: <input type='password' value='$id' readonly name='id'></p>
+                            <p>Nome Escola       .: <input type='text' name='nome' value='$nome'></p>
+                            <p>Tipo Periódo      : <input type='text' name='tp' value='$tp'> </p>
+                            <p>Qtd. Período      : <input name='qp' type='number' value='$qp'></p>
+                            <p>Status.......: <input name='status' type='text' value='$status'></p>                            
+                            <input type='submit' class='gerencia_btn' value='Salvar Alterações'>
+                        </form>";
                     }
-                }
 
-            ?>
-        </main>
+                ?>
+            </section>
+            <section id="data_gerencia">
+                <a href="arquivar.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Arquivar</button></a>
+                <a href="remover.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Remover</button></a>
+            </section>
+        </main> 
         <?php include "footer.php"; ?>
-        <script>
-            function ocultar_info(){
-                document.getElementById("info_gerencia").style.display = "none";
-            }
-            function ativo(qual){
-                document.getElementById(`escola${qual}`).style.color = "azure";
-                document.getElementById(`escola${qual}`).style.backgroundColor = "teal";
-            }
-
-            function inativo(qual){
-                document.getElementById(`escola${qual}`).style.color = "teal";
-                document.getElementById(`escola${qual}`).style.backgroundColor = "azure";
-            }
-
-            setTimeout(ocultar_info, 3000);
-        </script>
-    </body>
+</body>
 </html>
