@@ -36,6 +36,11 @@
             mysqli_query($conection, $sql);
             mysqli_close($conection);
         }
+        function Add($sql){
+            include("connection_db.php");
+            mysqli_query($conection, $sql);
+            mysqli_close($conection);
+        }
 
     }
 

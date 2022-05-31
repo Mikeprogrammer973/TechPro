@@ -9,8 +9,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciar <?php if($tipo == "escola"){
-        echo "Escolas";
+    <title>Nova <?php if($tipo == "escola"){
+        echo "Escola";
     }  ?></title>
     <style>
         header{
@@ -125,13 +125,6 @@
                 background-color: aliceblue;
                 font: bold 2.5vh monospace;
             }
-            #data_gerencia{
-                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
-                padding: 10px;
-                width: 500px;
-                text-align:center;
-                margin: auto;
-            }
             .gerencia_btn{
                 outline: none;
                 border: none;
@@ -166,40 +159,41 @@
             <nav id="pesquisa">
                 <input type="text" id="txt_busca"><input id="btn_busca" type="button" value="Buscar">
             </nav>
-        </header>
+</header>
         <main>
             <section id="data_info">
                 <?php
-
                     include_once("Banco.php");
 
-                    $banco = new Banco();
+                    $banco = new Banco();                    
 
-                    $info_escola = $banco -> Select("escolas", "WHERE code_escola = '".$id."'");
-
-                    if($info_escola){
-                        $nome = $info_escola[0]['nome_escola'];
-                        $tp = $info_escola[0]['tipo_periodo'];
-                        $qp = $info_escola[0]['qtd_periodo'];
-                        $status = $info_escola[0]['status'];
-                        print "<form name='gerencia' action='atualizar.php'>
-                            <input style='display:none;' type='text' value='escola' name='tipo'>
-                            <p>Cód. Acesso..: <input type='password' value='$id' readonly name='id'></p>
-                            <p>Nome Escola       .: <input type='text' name='nome' value='$nome' required></p>
-                            <p>Tipo Periódo      : <input type='text' name='tp' value='$tp' required> </p>
-                            <p>Qtd. Período      : <input name='qp' type='number' value='$qp' required></p>
-                            <p>Status.......: <input name='status' type='text' value='$status' required></p>                            
-                            <input type='submit' class='gerencia_btn' value='Salvar Alterações'>
+                    if($tipo == "escola"){
+                        $default_code = null;
+                        $error = false;
+                        do{
+                            $default_code = random_int(0, 10000000);
+                            $verify = $banco -> Select("escolas", "WHERE code_escola = '".$default_code."'");
+                            if(count($verify) > 0){
+                                $error = true;
+                            }else{
+                                $error = false;
+                            }
+                        }while($error);
+                        print "<form method='get' name='gerencia' action='add.php'>
+                            <input style='display:none;' type='text' value='escola' name='tipo'>                            
+                            <p>Admin........: <input type='text' name='adm' value='".$id."' readonly></p>
+                            <p>Cód. Acesso..: <input type='text' name='code_escola' value='".$default_code."' required></p>
+                            <p>Nome Escola       .: <input type='text' name='nome' required></p>
+                            <p>Tipo Periódo      : <input type='text' name='tp' required> </p>
+                            <p>Qtd. Período      : <input name='qp' type='number' required></p>
+                            <p>Status.......: <input name='status' type='text' value='C' readonly></p>                            
+                            <input type='submit' class='gerencia_btn' value='Adicionar'>
                         </form>";
                     }
 
                 ?>
             </section>
-            <section id="data_gerencia">
-                <a href="arquivar.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Arquivar</button></a>
-                <a href="remover.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Remover</button></a>
-            </section>
         </main> 
         <?php include "footer.php"; ?>
 </body>
-</html>
+</html

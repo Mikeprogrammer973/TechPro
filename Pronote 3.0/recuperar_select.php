@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciar <?php if($tipo == "escola"){
+    <title>Recuperar <?php if($tipo == "escola"){
         echo "Escolas";
     }  ?></title>
     <style>
@@ -125,14 +125,7 @@
                 background-color: aliceblue;
                 font: bold 2.5vh monospace;
             }
-            #data_gerencia{
-                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
-                padding: 10px;
-                width: 500px;
-                text-align:center;
-                margin: auto;
-            }
-            .gerencia_btn{
+            .recup_btn{
                 outline: none;
                 border: none;
                 box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
@@ -142,7 +135,31 @@
                 color: teal;
                 background-color: whitesmoke;
             }
-            .gerencia_btn:hover{
+            .recup_btn:hover{
+                color: whitesmoke;
+                background-color: teal;
+            }
+            form{
+                margin: 10px;
+                padding: 15px;
+                margin: auto;
+                border: 1px solid black;
+            }
+            legend{
+                color: teal;
+                background-color: whitesmoke;
+                border: none;
+                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
+                padding: 5px;
+            }
+            #recup_btn{
+                border: none;
+                outline: none;
+                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.553);
+                color: teal;
+                background-color: whitesmoke;
+            }
+            #recup_btn:hover{
                 color: whitesmoke;
                 background-color: teal;
             }
@@ -171,35 +188,28 @@
             <section id="data_info">
                 <?php
 
-                    include_once("Banco.php");
-
+                    include("Banco.php");
                     $banco = new Banco();
-
-                    $info_escola = $banco -> Select("escolas", "WHERE code_escola = '".$id."'");
-
-                    if($info_escola){
-                        $nome = $info_escola[0]['nome_escola'];
-                        $tp = $info_escola[0]['tipo_periodo'];
-                        $qp = $info_escola[0]['qtd_periodo'];
-                        $status = $info_escola[0]['status'];
-                        print "<form name='gerencia' action='atualizar.php'>
+                    $escolas_a = $banco -> Select("escolas", "WHERE code_adm_escola = '".$id."' AND status = 'A'");
+                    
+                    if(count($escolas_a) <= 0){
+                        print "<p style='text-align: center;font: bold 3vh monospace;color: red;border: none;padding: 10px;box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.753);'>Nenhuma Recuperação Disponível no momento!</p>";
+                    }
+                    if($escolas_a){
+                        for($e = 0; $e < count($escolas_a); $e++){
+                            print "<form action='recuperar.php'><legend>".$escolas_a[$e]['nome_escola']."</legend>
                             <input style='display:none;' type='text' value='escola' name='tipo'>
-                            <p>Cód. Acesso..: <input type='password' value='$id' readonly name='id'></p>
-                            <p>Nome Escola       .: <input type='text' name='nome' value='$nome' required></p>
-                            <p>Tipo Periódo      : <input type='text' name='tp' value='$tp' required> </p>
-                            <p>Qtd. Período      : <input name='qp' type='number' value='$qp' required></p>
-                            <p>Status.......: <input name='status' type='text' value='$status' required></p>                            
-                            <input type='submit' class='gerencia_btn' value='Salvar Alterações'>
-                        </form>";
+                            <p>Cód. Acesso..: <input type='password' value='".$escolas_a[$e]['code_escola']."' readonly name='id'></p>
+                            <p>Nome Escola       .: <input type='text' name='nome' value='".$escolas_a[$e]['nome_escola']."' readonly></p>
+                            <p>Tipo Periódo      : <input type='text' name='tp' value='".$escolas_a[$e]['tipo_periodo']."' readonly> </p>
+                            <p>Qtd. Período      : <input name='qp' type='number' value='".$escolas_a[$e]['qtd_periodo']."' readonly><p>
+                            <p>Status.......: <input name='status' type='text' value='".$escolas_a[$e]['status']."' readonly></p> 
+                            <input type='submit' id='recup_btn' value='Recuperar'>
+                            </form>";
+                        }
                     }
 
                 ?>
             </section>
-            <section id="data_gerencia">
-                <a href="arquivar.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Arquivar</button></a>
-                <a href="remover.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Remover</button></a>
-            </section>
-        </main> 
+        </main>
         <?php include "footer.php"; ?>
-</body>
-</html>

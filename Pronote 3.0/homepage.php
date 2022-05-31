@@ -3,6 +3,7 @@
 @$tipo = $_REQUEST["tipo"];
 @$code = $_REQUEST["code"];
 @$info_gerencia = $_REQUEST["info_gerencia"];
+@$info_add = $_REQUEST["info_add"];
 
 ?>
 <!doctype html>
@@ -109,6 +110,27 @@
                 padding: 10px;
                 box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.753);
             }
+            #data_gerencia{
+                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
+                padding: 10px;
+                width: 500px;
+                text-align:center;
+                margin: auto;
+            }
+            .gerencia_btn{
+                outline: none;
+                border: none;
+                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
+                padding: 5px;
+                margin: 10px;
+                font: bold 2.5vh monospace;
+                color: teal;
+                background-color: whitesmoke;
+            }
+            .gerencia_btn:hover{
+                color: whitesmoke;
+                background-color: teal;
+            }
             footer{
                 margin: auto;
                 max-width: 710px;
@@ -145,7 +167,14 @@
                 print "Dados Atualizados com sucesso!";
             }else if($info_gerencia == "remover"){
                 print "Escola Removida com sucesso!";
-            } ?></p>
+            }else if($info_gerencia == "recuperar"){
+                print "Escola Recuperada com sucesso!";
+            }
+            
+            if($info_add == "escola"){
+                print "Escola Adicionada com sucesso!";
+            }
+            ?></p>
             <?php
                 include("Banco.php");
                 $banco = new Banco();
@@ -163,6 +192,10 @@
                 }
 
             ?>
+            <section id="data_gerencia">
+                <a href="add_form.php?tipo=escola&id=<?php echo $code; ?>"><button class="gerencia_btn">Nova Escola</button></a>
+                <a href="recuperar_select.php?tipo=escola&id=<?php echo $code; ?>"><button class="gerencia_btn">Recuperar</button></a>
+            </section>
         </main>
         <?php include "footer.php"; ?>
         <script>
