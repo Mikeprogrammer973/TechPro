@@ -131,6 +131,20 @@
                 color: whitesmoke;
                 background-color: teal;
             }
+            #info{
+                margin: 5px;
+                font: bold 2.5vh monospace;
+                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.253);
+                padding: 5px;
+                border-radius: 50%;
+                text-decoration:none;
+                border: 2px solid whitesmoke;
+                color: teal;
+                }
+                #info:hover{
+                color: teal;
+                border: 2px solid teal;
+            }
             footer{
                 margin: auto;
                 max-width: 710px;
@@ -185,6 +199,7 @@
                             $id = $escolas[$c]["code_escola"];
                             print "<div style='border: none; padding: 10px; width: 250px; display> flex; flex-wrap:wrap; box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.753)'>
                             <a href='gerenciador.php?tipo=escola&id=$id'><img style='width: 100px; height: 100px;' src='./Img´s/desenho.png'></a>
+                            <a id='info' href='info.php?tipo=escola&id=$id'>!</a>
                             <a href='gerenciador.php?tipo=escola&id=$id'><button id='escola$c' onmouseenter='ativo($c)' onmouseout='inativo($c)' style='cursor:pointer; padding: 15px; border: none; box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453); outline: none; color: teal; background-color: azure;'>".$escolas[$c]["nome_escola"]."</button></a>
                             </div>";
                         }

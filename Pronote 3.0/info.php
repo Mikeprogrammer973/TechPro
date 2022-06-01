@@ -1,7 +1,6 @@
 <?php
 include("Banco.php");
 $banco = new Banco();
-
 @$tipo = $_REQUEST["tipo"];
 @$id = $_REQUEST['id'];
 
@@ -11,7 +10,7 @@ $banco = new Banco();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciar <?php
+    <title>Info <?php
     $e = $banco -> Select("escolas", "WHERE code_escola = '".$id."' AND status = 'C'");
     if($e){
         echo $e[0]["nome_escola"];
@@ -129,13 +128,6 @@ $banco = new Banco();
                 background-color: aliceblue;
                 font: bold 2.5vh monospace;
             }
-            #data_gerencia{
-                box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
-                padding: 10px;
-                width: 500px;
-                text-align:center;
-                margin: auto;
-            }
             .gerencia_btn{
                 outline: none;
                 border: none;
@@ -149,6 +141,11 @@ $banco = new Banco();
             .gerencia_btn:hover{
                 color: whitesmoke;
                 background-color: teal;
+            }
+            iframe{
+                width: 350px;
+                background-color: teal;
+                border: 1px solid black;
             }
     </style>
 </head>
@@ -181,27 +178,31 @@ $banco = new Banco();
 
                     $info_escola = $banco -> Select("escolas", "WHERE code_escola = '".$id."'");
 
-                    if($info_escola){
+                    if($tipo == "escola"){
+                        $adm = $info_escola[0]['code_adm_escola'];
                         $nome = $info_escola[0]['nome_escola'];
                         $tp = $info_escola[0]['tipo_periodo'];
                         $qp = $info_escola[0]['qtd_periodo'];
                         $status = $info_escola[0]['status'];
-                        print "<form name='gerencia' action='atualizar.php'>
-                            <input style='display:none;' type='text' value='escola' name='tipo'>
-                            <p>Cód. Acesso..: <input type='password' value='$id' readonly name='id'></p>
-                            <p>Nome Escola       .: <input type='text' name='nome' value='$nome' required></p>
-                            <p>Tipo Periódo      : <input type='text' name='tp' value='$tp' required> </p>
-                            <p>Qtd. Período      : <input name='qp' type='number' value='$qp' required></p>
-                            <p>Status.......: <input name='status' type='text' value='$status' required></p>                            
-                            <input type='submit' class='gerencia_btn' value='Salvar Alterações'>
-                        </form>";
+                        print "
+                            <p>Admin........: <input type='text' value='$adm' readonly></p>
+                            <p>Cód. Acesso..: <input type='text' value='$id' readonly></p>
+                            <p>Nome Escola       .: <input type='text' name='nome' value='$nome' readonly></p>
+                            <p>Tipo Periódo      : <input type='text' name='tp' value='$tp' readponly> </p>
+                            <p>Qtd. Período      : <input name='qp' type='number' value='$qp' readonly></p>
+                            <p>Status.......: <input name='status' type='text' value='$status' readonly></p>
+                            <p>
+                                Alunos:<br><br><iframe name='aluno' src='exibir_info.php?tipo=escola_aluno&id=$id'></iframe>
+                            </p>
+                            <p>
+                                Professores:<br><br><iframe name='profs' src='exibir_info.php?tipo=escola_prof&id=$id'></iframe>
+                            </p>
+                            <p>
+                                Disciplinas:<br><br><iframe name='materias' src='exibir_info.php?tipo=escola_mats&id=$id'></iframe>
+                            </p>
+                            ";
                     }
-
                 ?>
-            </section>
-            <section id="data_gerencia">
-                <a href="arquivar.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Arquivar</button></a>
-                <a href="remover.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Remover</button></a>
             </section>
         </main> 
         <?php include "footer.php"; ?>
