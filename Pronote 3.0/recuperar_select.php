@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="btns_back.js"></script>
     <title>Recuperar <?php if($tipo == "escola"){
         echo "Escolas";
     }  ?></title>
@@ -152,14 +153,14 @@
                 box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
                 padding: 5px;
             }
-            #recup_btn{
+            #recup_btn, #back{
                 border: none;
                 outline: none;
                 box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.553);
                 color: teal;
                 background-color: whitesmoke;
             }
-            #recup_btn:hover{
+            #recup_btn:hover, #back:hover{
                 color: whitesmoke;
                 background-color: teal;
             }
@@ -211,5 +212,8 @@
 
                 ?>
             </section>
+            <button id="back">Voltar</button>
         </main>
         <?php include "footer.php"; ?>
+    </body>
+</html>

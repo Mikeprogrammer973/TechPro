@@ -11,6 +11,7 @@ $banco = new Banco();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="btns_back.js"></script>
     <title>Gerenciar <?php
     $e = $banco -> Select("escolas", "WHERE code_escola = '".$id."' AND status = 'C'");
     if($e){
@@ -136,7 +137,7 @@ $banco = new Banco();
                 text-align:center;
                 margin: auto;
             }
-            .gerencia_btn{
+            .gerencia_btn, #back{
                 outline: none;
                 border: none;
                 box-shadow: 2px 2px 1px rgb(0, 0, 0, 0.453);
@@ -146,7 +147,7 @@ $banco = new Banco();
                 color: teal;
                 background-color: whitesmoke;
             }
-            .gerencia_btn:hover{
+            .gerencia_btn:hover, #back:hover{
                 color: whitesmoke;
                 background-color: teal;
             }
@@ -203,7 +204,10 @@ $banco = new Banco();
                 <a href="arquivar.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Arquivar</button></a>
                 <a href="remover.php?tipo=escola&id=<?php echo $id; ?>"><button class="gerencia_btn">Remover</button></a>
             </section>
-        </main> 
+            <button id="back">Voltar</button>
+        </main>
+         
         <?php include "footer.php"; ?>
+        
 </body>
 </html>

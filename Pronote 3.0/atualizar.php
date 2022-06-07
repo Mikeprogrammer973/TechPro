@@ -19,9 +19,6 @@ if($tipo == "escola"){
         $qp = -1;
     }
     @$status = $_REQUEST["status"];
-    if($status != "A" || $status != "C"){
-        $status = "A";
-    }
     $cons = $banco -> Select("escolas", "WHERE code_escola = '".$id."'");
     $code = $cons[0]["code_adm_escola"];
     $banco -> Update("UPDATE escolas SET `status` = '".$status."', nome_escola = '".$nome."', tipo_periodo = '".$tp."', qtd_periodo = '".$qp."' WHERE code_escola = '".$id."'");
